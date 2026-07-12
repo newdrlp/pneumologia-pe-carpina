@@ -207,9 +207,11 @@ window.peGetGclid=function(){try{var r=localStorage.getItem('pe_gclid');if(!r)re
   Clínica Carpina · Rua Martins Júnior, 01, São José — Carpina PE
 </footer>
 <script>var CLINICA_ID="carpina";
-var SCRIPT_URL="https://script.google.com/macros/s/AKfycbw6ABM1F6UmxGGRjyHDCCN5jPlWgsFHZK3IhhBk3B-ymQLQOUQV6cPeyKf6P4VI9Om9/exec",CIDADE="Carpina",CLINICA="Clínica Carpina";var FREQUENCIA="quinzenal",DIA_SEMANA=1,DATA_BASE="2026-05-11",TURNO="tarde",HORARIO="13h às 17h";
+var SCRIPT_URL="https://script.google.com/macros/s/AKfycbw6ABM1F6UmxGGRjyHDCCN5jPlWgsFHZK3IhhBk3B-ymQLQOUQV6cPeyKf6P4VI9Om9/exec",CIDADE="Carpina",CLINICA="Clínica Carpina";var FREQUENCIA="quinzenal",DIA_SEMANA=1,DATA_BASE="2026-05-11",DATA_EXTRA="2026-07-13",TURNO="tarde",HORARIO="13h às 17h";
 function calcProximaData(){
   var hoje=new Date();hoje.setHours(0,0,0,0);
+  var extra=DATA_EXTRA?new Date(DATA_EXTRA+"T12:00:00"):null;
+  if(extra&&extra>hoje)return extra;
   if(FREQUENCIA==="semanal"){
     var d=new Date(hoje);
     var diff=(DIA_SEMANA-d.getDay()+7)%7;
@@ -252,12 +254,15 @@ function enviar(){
   var FREQ = "quinzenal";
   var DIA_SEMANA = 1; // 0=dom,1=seg,2=ter,3=qua,4=qui,5=sex
   var BASE = "2026-05-11"; // data base para quinzenal (YYYY-MM-DD)
+  var DATA_EXTRA = "2026-07-13"; // atendimento extra temporário
   var TURNO_CFG = "tarde";
   var HORARIO_CFG = "13h às 17h";
   var TURNO_NOME = {manha:"Manhã",tarde:"Tarde",ambos:"Manhã e tarde"};
 
   function proximaData() {
     var hoje = new Date(); hoje.setHours(0,0,0,0);
+    var extra = DATA_EXTRA ? new Date(DATA_EXTRA + 'T12:00:00') : null;
+    if (extra && extra > hoje) return extra;
     if (FREQ === 'semanal') {
       var d = new Date(hoje);
       var diff = (DIA_SEMANA - d.getDay() + 7) % 7;
